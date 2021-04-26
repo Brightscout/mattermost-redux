@@ -65,6 +65,7 @@ const Preferences = {
             sidebarTextActiveBorder: '#b5a2bf',
             sidebarTextActiveColor: '#ffffff',
             sidebarHeaderBg: '#4e3060',
+            sidebarTeamBarBg: '#3e264c',
             sidebarHeaderTextColor: '#ffffff',
             onlineIndicator: '#8dde5d',
             awayIndicator: '#ff8b2c',
@@ -82,7 +83,7 @@ const Preferences = {
             mentionHighlightBg: '#fdff8e',
             mentionHighlightLink: '#0f758e',
             codeTheme: 'github',
-        } as Theme,
+        },
         mattermost: {
             type: 'Mattermost',
             sidebarBg: '#145dbf',
