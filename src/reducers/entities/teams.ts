@@ -50,6 +50,16 @@ function teams(state: IDMappedObjects<Team> = {}, action: GenericAction) {
 
         return state;
     }
+    case TeamTypes.RECEIVED_TEAM_UNARCHIVED: {
+        const {teamId} = action.data;
+        const team = state[teamId];
+
+        if (!team) {
+            return state;
+        }
+
+        return {...state, [teamId]: {...team, delete_at: 0}};
+    }
 
     case TeamTypes.UPDATED_TEAM_SCHEME: {
         const {teamId, schemeId} = action.data;
