@@ -39,7 +39,7 @@ async function getProfilesAndStatusesForMembers(userIds: string[], dispatch: Dis
             statusesToLoad.push(userId);
         }
     });
-    const requests: Array<Promise<ActionResult|ActionResult[]>> = [];
+    const requests: Array<Promise<ActionResult | ActionResult[]>> = [];
 
     if (profilesToLoad.length) {
         requests.push(dispatch(getProfilesByIds(profilesToLoad)));
@@ -245,6 +245,26 @@ export function deleteTeam(teamId: string): ActionFunc {
         );
 
         dispatch(batchActions(actions));
+
+        return {data: true};
+    };
+}
+
+export function unarchiveTeam(teamId: string): ActionFunc {
+    return async (dispatch: DispatchFunc, getState: GetStateFunc) => {
+        let team: Team;
+        try {
+            team = await Client4.unarchiveTeam(teamId);
+        } catch (error) {
+            forceLogoutIfNecessary(error, dispatch, getState);
+            dispatch(logError(error));
+            return {error};
+        }
+
+        dispatch({
+            type: TeamTypes.RECEIVED_TEAM_UNARCHIVED,
+            data: team,
+        });
 
         return {data: true};
     };
